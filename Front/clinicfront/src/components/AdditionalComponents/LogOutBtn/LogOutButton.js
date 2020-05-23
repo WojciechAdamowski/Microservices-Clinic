@@ -1,16 +1,17 @@
 import React from "react";
 
 import {Button} from "@material-ui/core";
-import {redirectByRole} from "../../../actions";
+import {useHistory} from "react-router";
 
-export const LogOutButton = (props) => {
+export const LogOutButton = () => {
+    const history = useHistory();
     const logOutButtonClick = () => {
         localStorage.removeItem("token");
-        redirectByRole(null, props);
+        history.push("/");
     };
 
     return (
-        <Button variant="contained" color="primary" disableElevation onClick={() => logOutButtonClick()}>
+        <Button variant="contained" style={{backgroundColor: "#4d1919", color: "white"}} disableElevation onClick={() => logOutButtonClick()}>
             Log Out
         </Button>
     )

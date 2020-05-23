@@ -1,65 +1,47 @@
-import React, {useEffect, useState} from "react";
-
-import {sendFetchRequestIsThereLoginUser, sendFetchRequestLoginUser} from "./SetLoginPage";
-
-import {redirectByRole} from "../../../actions";
-
+import React from "react";
 import {FormForInputUserInformation} from "../../AdditionalComponents/FormForInputUserInfo/FormForInputUserInformation";
 import {Container} from "@material-ui/core";
 import AlertMessage from "../../AdditionalComponents/Alert/AlertMessage";
 
-
 export const LoginPage = (props) => {
-    const { error, setStoreError, setStoreUserDetails } = props;
-    const [showWarningMessage, setShowWarningMessage] = useState(error["isError"]);
-    const [userDetails, setUserDetails] = useState({
-        uuid: null,
-        role: null
-    });
 
-    //Effects after each render
-    useEffect(() => {
-        setStoreUserDetails(userDetails);
-        console.log(userDetails);
-        if (userDetails.role){redirectByRole(userDetails.role, props)}
-    }, [userDetails.role, userDetails, props, setStoreUserDetails]);
+  const {
+    userDetails,
+    dispatchUserState,
+    sendFetchForLoginUser
+  } = props;
 
-    useEffect(() => {
-        if (localStorage.token && !userDetails.role){sendFetchRequestIsThereLoginUser({setUserDetails})}
-    }, [userDetails.role]);
+  const styleForMainContainer = {
+    backgroundColor: "white",
+    margin: "0px",
+    padding: "0px"
+  };
 
-    useEffect(() => {
-        setShowWarningMessage(error["isError"]);
-    }, [error.isError, error]);
-
-    //Main HTML return
-    return (
-        <Container>
-            <AlertMessage
-                show={showWarningMessage}
-                onClose={() => {setStoreError({isError: false, responseStatus: null})}}
-                message="Wrong Login Details"
-                type="error"
-            />
-            <FormForInputUserInformation
-                {...props}
-                fetchRequest        ={(userDetails) => {
-                    sendFetchRequestLoginUser(
-                        userDetails,
-                        {setUserDetails},
-                        {ifCatchSetErrorInStore: (error) => {setStoreError(error)}})
-                }}
-                submitButtonTitle   ="Log In"
-                showEmailForm       ={true}
-                showPasswordForm    ={true}
-                showRoleForm        ={false}
-                showFirstNameForm   ={false}
-                showLastNameForm    ={false}
-                showLicenceForm     ={false}
-                showPhotoURLForm    ={false}
-            />
-        </Container>
-    );
+  //Main HTML return
+  return (
+    <Container
+      style={styleForMainContainer}
+    >
+      <AlertMessage
+        show={userDetails.isError}
+        onClose={() => {dispatchUserState({type: "CLOSE_ERROR_MASSAGE"})}}
+        message="Wrong Login Details"
+        type="error"
+      />
+      <FormForInputUserInformation
+        {...props}
+        fetchRequest        ={(loginDetails) => {sendFetchForLoginUser(loginDetails)}}
+        submitButtonTitle   ="Log In"
+        showEmailForm       ={true}
+        showPasswordForm    ={true}
+        showRoleForm        ={false}
+        showFirstNameForm   ={false}
+        showLastNameForm    ={false}
+        showLicenceForm     ={false}
+        showPhotoURLForm    ={false}
+      />
+    </Container>
+  );
 };
 
 export default LoginPage

@@ -1,6 +1,6 @@
 import {Col, Form} from "react-bootstrap";
 import React, {useState} from "react";
-import {TextField} from "@material-ui/core";
+import CustomTextField from "../../CustomTextField";
 
 export const PhotoURLForm = (props) => {
     const { handleChange, validation, userInformation, setIsCorrectInputInForms} = props;
@@ -9,7 +9,6 @@ export const PhotoURLForm = (props) => {
     const [messageForIncorrectInput, setMessageForIncorrectInput] = useState(null);
 
     const setGoodInputInAllStates = () => {
-        console.log("photo true");
         setIsCorrectInput(true);
         setIsCorrectInputInForms({photoURLForm: true});
     };
@@ -31,7 +30,7 @@ export const PhotoURLForm = (props) => {
     };
     return (
         <Form.Group as={Col}>
-            <TextField
+            <CustomTextField
                 onChange={(e) => {
                     handleChange(e);
                     if (validation){checkInputCorrect(e)}
