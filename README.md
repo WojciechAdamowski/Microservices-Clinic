@@ -1,19 +1,57 @@
-**Clinic**
+# Microservices-Clinic
+Implementation of medical unit administration system based on Spring Framework. The system is set up as distributed microservices architecture with use of Spring Boot tools. Main functionality of that system is registration of users(patients, doctors), managing doctors calendars and registering patients for visits.   
 
-This is an online clinic where as a patient we can register visits to doctors, view what visits are available, register and log in as a doctor or patient. In this project I was responsible for the front-end. This project is created to be part of learning
+## Table of contents
+* [Architecture ](#architecture)
+* [Tech_Stack](#tech_stack)
+* [Screenshots](#screenshots)
+* [TODO](#TODO)
+* [Contact](#contact)
 
-**Features**: 
-  * Login
-  * Register
-  * Change user details
-  * Delete account
-  * Viewing visits
-  
-  
-**Built With**
+# Architecture 
+![Example screenshot](./Screenshots/Clinics%20Portal%20MSSC%20Architecture.png)
+### Eureka
+Service registry server.
+### Zuul
+API gateway responsible for authorization.
+### Authentication
+Service responsible for authentication.
+### Patient
+Service implementing patient related logic.
+### Doctor
+Service implementing doctor related logic.
+### Clinic
+Service implementing clinic related logic.
+### Security
+![Example screenshot](./Screenshots/Registration_Log%20in_Pull%20out_%20%20Data%20Flow.png)
+### Example communication between mssc 
+![Example screenshot](./Screenshots/Visit%20registration.png)
+# Tech_Stack 
+* Java 13
+* Spring Boot 2 
+* Netflix Eureka
+* DB Postgres
+* JPA / Hibernate 
+* Swagger 2
+* React
+# Screenshots
+![Example screenshot](./Screenshots/Login.png)
+![Example screenshot](./Screenshots/Edit.png)
+![Example screenshot](./Screenshots/Information.png)
+![Example screenshot](./Screenshots/Visits.png)
+![Example screenshot](./Screenshots/Delete.png)
 
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [IntelliJ IDEA](https://www.jetbrains.com/idea/) - Tool
-* [Lombok](https://projectlombok.org/) - Java Library
-* [React](https://pl.reactjs.org/) - JS Library
-* [Spring-Boot](https://spring.io/projects/spring-boot) - Web Framework
+## TODO in progress
+* doctor's unitests tests and integration tests <--- move here tests from postman 
+* search (kafka || rabit && elasticSearch)
+* statistic mssc in .NET MVC
+* config mssc 
+* rewrite to use faign, hateos  
+
+Project is in progress.
+
+## Contact
+Created by:
+* [Gaudnik Wojciech](mailto:gaudnik.wojciech@gmail.com) - feel free to contact me! 
+* Adamowski Wojciech
+* Walczak Weronika
